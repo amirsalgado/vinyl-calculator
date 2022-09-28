@@ -6,8 +6,7 @@ const Calc: React.FC = () => {
     const [designWidth, setDesignWidth] = useState(0);
     const [designHeigth, setDesignHeigth] = useState(0);
     const [shirtCost, setShirtCost] = useState(0);
-    
-    const fixedCost = 5000;
+    const [fixedCost, setFixedCost] = useState(2000);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -22,7 +21,7 @@ const Calc: React.FC = () => {
     const area = designArea();
     
     const vinylCostCalculator = () => {
-        const cost = vinylCost / area;
+        const cost = (vinylCost / 5000) * area;
 
         return cost;
     }
@@ -31,7 +30,6 @@ const Calc: React.FC = () => {
 
     const cutCost = () => {
         const cut = totalVinylCost * 2;
-
         return cut;
     }
 
@@ -79,9 +77,13 @@ const Calc: React.FC = () => {
                 />
             </label>
             <br />
-            <div>
-                Costos Fijos: {fixedCost}
-            </div>
+            <label>Costos Fijos: 
+                <input 
+                    type = "text" 
+                    value = {fixedCost}
+                    onChange = {e => setFixedCost(parseFloat(e.target.value))}
+                />
+            </label>
             <br />
             <button type="submit" onClick={totalPrice}>Calcular</button>
             <br />
